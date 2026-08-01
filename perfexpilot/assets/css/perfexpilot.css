@@ -1,0 +1,265 @@
+/* PerfexPilot — Scan & Fill
+   Scoped to .perfexpilot-* so nothing here can leak into the Perfex admin theme. */
+
+.perfexpilot-launch {
+    margin-bottom: 15px;
+}
+
+.perfexpilot-launch-btn {
+    min-height: 38px;
+}
+
+.perfexpilot-launch-btn .fa {
+    margin-right: 6px;
+}
+
+/* ---------------------------------------------------------------- Dropzone */
+
+.perfexpilot-dropzone {
+    border: 2px dashed #cdd5e0;
+    border-radius: 6px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .15s ease, background-color .15s ease;
+}
+
+.perfexpilot-dropzone:hover,
+.perfexpilot-dropzone.is-dragging {
+    border-color: #03a9f4;
+    background-color: #f4fbff;
+}
+
+.perfexpilot-dropzone-icon {
+    font-size: 42px;
+    color: #9aa8bd;
+    margin-bottom: 10px;
+}
+
+.perfexpilot-dropzone-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.perfexpilot-capture-buttons {
+    margin-top: 18px;
+}
+
+.perfexpilot-capture-buttons .btn {
+    min-height: 44px;
+    min-width: 140px;
+    margin: 4px;
+}
+
+/* ----------------------------------------------------------------- Loading */
+
+.perfexpilot-loading {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.perfexpilot-loading-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}
+
+/* -------------------------------------------------------------- Confidence */
+
+.perfexpilot-confidence {
+    margin-bottom: 12px;
+}
+
+.perfexpilot-confidence-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #7c8798;
+    margin-bottom: 6px;
+}
+
+.perfexpilot-meter {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #eceff3;
+    overflow: hidden;
+}
+
+.perfexpilot-meter-bar {
+    height: 100%;
+    width: 0;
+    border-radius: 4px;
+    transition: width .3s ease;
+    background-color: #9aa8bd;
+}
+
+.perfexpilot-meter-bar.is-low    { background-color: #e74c3c; }
+.perfexpilot-meter-bar.is-medium { background-color: #f0ad4e; }
+.perfexpilot-meter-bar.is-high   { background-color: #2ecc71; }
+
+/* ------------------------------------------------------------------ Fields */
+
+.perfexpilot-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #eceff3;
+    padding-bottom: 6px;
+}
+
+.perfexpilot-section-head h5 {
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: .04em;
+    color: #7c8798;
+}
+
+.perfexpilot-field {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.perfexpilot-field-check {
+    width: 28px;
+    flex: 0 0 28px;
+    margin: 0;
+}
+
+.perfexpilot-field-label {
+    flex: 0 0 34%;
+    padding-right: 12px;
+    font-weight: 600;
+}
+
+.perfexpilot-field-confidence {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 400;
+    color: #9aa8bd;
+}
+
+.perfexpilot-field-value {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.perfexpilot-totals {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed #eceff3;
+    font-size: 12px;
+}
+
+.perfexpilot-totals span {
+    margin-right: 16px;
+    white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- Customer */
+
+.perfexpilot-customer-option,
+.perfexpilot-tax-option {
+    display: block;
+    font-weight: 400;
+    padding: 6px 8px;
+    margin: 0 0 4px;
+    border: 1px solid #eceff3;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.perfexpilot-customer-option.is-selected {
+    border-color: #03a9f4;
+    background-color: #f4fbff;
+}
+
+.perfexpilot-customer-score {
+    float: right;
+    color: #9aa8bd;
+    font-size: 11px;
+}
+
+/* --------------------------------------------------------------- Tax block */
+
+.perfexpilot-tax-detected {
+    margin-bottom: 8px;
+}
+
+.perfexpilot-tax-status:empty {
+    display: none;
+}
+
+/* ------------------------------------------------------------- Line items */
+
+.perfexpilot-items .table {
+    margin-bottom: 0;
+}
+
+.perfexpilot-items .form-control {
+    min-width: 60px;
+}
+
+.perfexpilot-col-check {
+    width: 34px;
+}
+
+.perfexpilot-col-num {
+    width: 90px;
+}
+
+/* ------------------------------------------------------------------ Mobile */
+
+@media (max-width: 768px) {
+    .perfexpilot-modal .modal-dialog {
+        margin: 8px;
+    }
+
+    .perfexpilot-dropzone {
+        padding: 28px 12px;
+    }
+
+    .perfexpilot-capture-buttons .btn {
+        display: block;
+        width: 100%;
+        margin: 6px 0;
+    }
+
+    /* One column per field, with tap targets that stay comfortable. */
+    .perfexpilot-field {
+        flex-wrap: wrap;
+        padding: 8px 0;
+        border-bottom: 1px solid #f4f6f9;
+    }
+
+    .perfexpilot-field-label {
+        flex: 1 1 calc(100% - 28px);
+        padding-right: 0;
+        margin-bottom: 4px;
+    }
+
+    .perfexpilot-field-value {
+        flex: 1 1 100%;
+    }
+
+    .perfexpilot-field-value .form-control {
+        height: 40px;
+    }
+
+    .perfexpilot-items .form-control {
+        min-width: 52px;
+    }
+
+    .perfexpilot-launch-btn {
+        width: 100%;
+    }
+}
