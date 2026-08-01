@@ -6,12 +6,15 @@ payments, credit notes, projects, tasks, tickets, staff, expenses, contracts and
 items, plus an admin panel for managing API keys.
 
 Also includes **perfex-mcp**, an MCP connector that lets Claude (Claude Code /
-Claude Desktop / any MCP client) read and write CRM data through that API, and
+Claude Desktop / any MCP client) read and write CRM data through that API,
 **WA SMS**, a WhatsApp & SMS communication module (personal-phone gateway or
 official Business Cloud API, generic GET/POST SMS gateways, incoming webhooks
-and keyword-based automatic replies).
+and keyword-based automatic replies), and **PerfexPilot**, an OCR + autofill
+module that reads a PDF or photo of an invoice or receipt and fills the
+Invoice, Expense and Record Payment forms straight from the page.
 
 - Perfex API module: [`perfex_api/`](perfex_api/) — zip: [`dist/perfex_api.zip`](dist/perfex_api.zip), docs: [`perfex_api/README.md`](perfex_api/README.md)
 - WA SMS module: [`wasms/`](wasms/) — zip: [`dist/wasms.zip`](dist/wasms.zip), docs: [`wasms/README.md`](wasms/README.md)
+- PerfexPilot module: [`perfexpilot/`](perfexpilot/) — zip: [`dist/perfexpilot.zip`](dist/perfexpilot.zip), docs: [`perfexpilot/README.md`](perfexpilot/README.md)
 - MCP connector: [`perfex-mcp/`](perfex-mcp/) — zip: [`dist/perfex-mcp.zip`](dist/perfex-mcp.zip), setup guide: [`perfex-mcp/README.md`](perfex-mcp/README.md)
 - Install module zips via **Setup → Modules** in Perfex; rebuild them with `./build.sh`
