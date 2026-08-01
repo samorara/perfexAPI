@@ -9,6 +9,9 @@ Installable Perfex CRM module for two-way WhatsApp and SMS communication:
 - **SMS via any HTTP gateway** — same URL-template mechanism, GET or POST.
 - **Automatic replies** — incoming messages hit the module's webhooks and are
   answered automatically based on your keyword rules and settings.
+- **Zuri, the AI agent** — messages that don't match a keyword rule can be
+  answered by a built-in AI agent powered by the Claude API, using your
+  business info and the recent conversation with that customer.
 - **Message log** — every incoming and outgoing message is recorded with its
   gateway response.
 
@@ -65,8 +68,32 @@ On every incoming message the module:
 1. Logs it in the Message Log.
 2. Checks your **Auto Replies** rules top to bottom (keyword + match type:
    contains / exact / starts with / any message, per channel or both).
-3. Sends the first matching reply back through the same channel — or the
-   **Default Reply** if no rule matches (leave it empty to send nothing).
+   Keyword rules always win — use them for exact business answers.
+3. If no rule matches and the **AI agent** is enabled, Zuri generates a reply.
+4. Otherwise, the **Default Reply** is sent (leave it empty to send nothing).
+
+## Zuri — the AI agent
+
+Enable it under **Settings → AI Agent (Zuri)**:
+
+1. Paste an **Anthropic API key** (from the [Anthropic Console](https://platform.claude.com/)).
+   The key is stored server-side and never shown again in the UI.
+2. Optionally rename the agent, change the model (default `claude-opus-5`),
+   and tune max tokens / how many previous messages are used as context.
+3. Fill in **Business Info & Instructions** — opening hours, products,
+   policies, tone, escalation rules. Zuri follows these on every reply.
+4. Tick **Enable AI agent** and save.
+
+How Zuri behaves:
+
+- Replies are short, plain-text, and in the customer's language — tuned for
+  SMS/WhatsApp, not essays.
+- The last few messages exchanged with that phone number (from the Message
+  Log) are sent as conversation context, so follow-up questions work.
+- If the API call fails or the model declines the request, the module falls
+  back to your Default Reply, and the reason is recorded in the Perfex
+  activity log. Keyword rules are never affected.
+- Every AI reply is logged in the Message Log like any other outgoing message.
 
 The webhook's JSON response also contains the matched reply text, so gateway
 apps that can answer directly from an HTTP response may deliver it themselves.

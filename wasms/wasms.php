@@ -4,8 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 Module Name: WA SMS Communication
-Description: WhatsApp & SMS communication for Perfex CRM. Send WhatsApp messages via your existing personal phone (HTTP gateway) or the official WhatsApp Business Cloud API, send SMS through any HTTP gateway (GET or POST), receive incoming messages via webhooks and reply automatically with keyword-based rules.
-Version: 1.0.0
+Description: WhatsApp & SMS communication for Perfex CRM. Send WhatsApp messages via your existing personal phone (HTTP gateway) or the official WhatsApp Business Cloud API, send SMS through any HTTP gateway (GET or POST), receive incoming messages via webhooks and reply automatically with keyword rules or Zuri, the built-in AI agent.
+Version: 1.1.0
 Requires at least: 2.3.*
 Author: Perfex API Module
 */
@@ -36,6 +36,8 @@ function wasms_uninstall_hook()
         'wasms_cloud_token', 'wasms_cloud_phone_number_id', 'wasms_cloud_api_version', 'wasms_cloud_verify_token',
         'wasms_sms_url', 'wasms_sms_method', 'wasms_sms_body_format',
         'wasms_webhook_secret', 'wasms_auto_reply_enabled', 'wasms_default_reply',
+        'wasms_ai_enabled', 'wasms_ai_api_key', 'wasms_ai_model', 'wasms_ai_agent_name',
+        'wasms_ai_persona', 'wasms_ai_max_tokens', 'wasms_ai_history_limit',
     ] as $option) {
         delete_option($option);
     }

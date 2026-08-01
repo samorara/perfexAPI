@@ -69,7 +69,19 @@ class Wasms extends AdminController
                 'wasms_sms_body_format'      => $this->input->post('wasms_sms_body_format') === 'json' ? 'json' : 'form',
                 'wasms_auto_reply_enabled'   => $this->input->post('wasms_auto_reply_enabled') ? '1' : '0',
                 'wasms_default_reply'        => trim($this->input->post('wasms_default_reply', false)),
+                'wasms_ai_enabled'           => $this->input->post('wasms_ai_enabled') ? '1' : '0',
+                'wasms_ai_model'             => trim($this->input->post('wasms_ai_model')) ?: 'claude-opus-5',
+                'wasms_ai_agent_name'        => trim($this->input->post('wasms_ai_agent_name')) ?: 'Zuri',
+                'wasms_ai_persona'           => trim($this->input->post('wasms_ai_persona', false)),
+                'wasms_ai_max_tokens'        => (string) max(50, min((int) $this->input->post('wasms_ai_max_tokens') ?: 500, 4000)),
+                'wasms_ai_history_limit'     => (string) max(0, min((int) $this->input->post('wasms_ai_history_limit') ?: 10, 50)),
             ];
+
+            // Keep the stored key when the (password) field is left empty
+            $api_key = trim($this->input->post('wasms_ai_api_key', false));
+            if ($api_key !== '') {
+                $options['wasms_ai_api_key'] = $api_key;
+            }
 
             foreach ($options as $name => $value) {
                 update_option($name, $value);

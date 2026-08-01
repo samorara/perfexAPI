@@ -95,14 +95,10 @@ class Wasms_model extends App_Model
     }
 
     /**
-     * Find the auto reply text for an incoming message, or null.
+     * Find a matching keyword rule for an incoming message, or null.
      */
-    public function match_auto_reply($channel, $message)
+    public function match_rule($channel, $message)
     {
-        if (get_option('wasms_auto_reply_enabled') != '1') {
-            return null;
-        }
-
         $message_lc = mb_strtolower(trim($message));
 
         foreach ($this->get_auto_replies(true) as $rule) {
@@ -133,18 +129,22 @@ class Wasms_model extends App_Model
             }
         }
 
-        $default = get_option('wasms_default_reply');
-
-        return $default !== '' ? $default : null;
+        return null;
     }
 
     /**
-     * Handle an incoming message: log it, match rules, send the reply.
+     * Handle an incoming message: log it, pick a reply, send it.
+     *
+     * Reply resolution order:
+     *   1. Keyword rules (exact business answers always win)
+     *   2. Zuri, the AI agent (if enabled and configured)
+     *   3. The default fallback reply
      *
      * @return string|null the reply text that was sent (or null)
      */
     public function process_incoming($channel, $phone, $message)
     {
+        // Log the inbound message first so it becomes part of Zuri's history
         $this->log_message([
             'channel'   => $channel,
             'direction' => 'in',
@@ -153,7 +153,23 @@ class Wasms_model extends App_Model
             'status'    => 'received',
         ]);
 
-        $reply = $this->match_auto_reply($channel, $message);
+        if (get_option('wasms_auto_reply_enabled') != '1') {
+            return null;
+        }
+
+        $reply = $this->match_rule($channel, $message);
+
+        if ($reply === null) {
+            $this->load->library('wasms/wasms_ai');
+            if ($this->wasms_ai->is_enabled()) {
+                $reply = $this->wasms_ai->generate_reply($channel, $phone, $message);
+            }
+        }
+
+        if ($reply === null) {
+            $default = get_option('wasms_default_reply');
+            $reply   = $default !== '' ? $default : null;
+        }
 
         if ($reply !== null && trim($phone) !== '') {
             $this->send($channel, $phone, $reply, 'out');

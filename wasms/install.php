@@ -49,3 +49,12 @@ add_option('wasms_sms_body_format', 'form');
 add_option('wasms_webhook_secret', bin2hex(random_bytes(12)));
 add_option('wasms_auto_reply_enabled', '1');
 add_option('wasms_default_reply', '');
+
+// Zuri — AI agent settings
+add_option('wasms_ai_enabled', '0');
+add_option('wasms_ai_api_key', '');
+add_option('wasms_ai_model', 'claude-opus-5');
+add_option('wasms_ai_agent_name', 'Zuri');
+add_option('wasms_ai_persona', '');
+add_option('wasms_ai_max_tokens', '500');
+add_option('wasms_ai_history_limit', '10');

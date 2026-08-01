@@ -239,6 +239,38 @@
                                 </div>
 
                                 <hr />
+                                <h4><?php echo _l('wasms_ai_settings'); ?></h4>
+                                <p class="text-muted"><?php echo _l('wasms_ai_help'); ?></p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="checkbox checkbox-primary">
+                                            <input type="checkbox" name="wasms_ai_enabled" id="wasms_ai_enabled" value="1" <?php echo get_option('wasms_ai_enabled') == '1' ? 'checked' : ''; ?>>
+                                            <label for="wasms_ai_enabled"><?php echo _l('wasms_ai_enabled'); ?></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <?php echo render_input('wasms_ai_agent_name', 'wasms_ai_agent_name', get_option('wasms_ai_agent_name') ?: 'Zuri'); ?>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <?php echo render_input('wasms_ai_api_key', 'wasms_ai_api_key', '', 'password', ['placeholder' => get_option('wasms_ai_api_key') !== '' ? '••••••••  (' . _l('wasms_ai_key_saved') . ')' : 'sk-ant-...', 'autocomplete' => 'new-password']); ?>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <?php echo render_input('wasms_ai_model', 'wasms_ai_model', get_option('wasms_ai_model') ?: 'claude-opus-5'); ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <?php echo render_textarea('wasms_ai_persona', 'wasms_ai_persona', get_option('wasms_ai_persona'), ['rows' => 4, 'placeholder' => _l('wasms_ai_persona_placeholder')]); ?>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <?php echo render_input('wasms_ai_max_tokens', 'wasms_ai_max_tokens', get_option('wasms_ai_max_tokens') ?: '500', 'number'); ?>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <?php echo render_input('wasms_ai_history_limit', 'wasms_ai_history_limit', get_option('wasms_ai_history_limit') ?: '10', 'number'); ?>
+                                    </div>
+                                </div>
+
+                                <hr />
                                 <h4><?php echo _l('wasms_webhooks'); ?></h4>
                                 <p><?php echo _l('wasms_webhook_whatsapp_label'); ?>: <code><?php echo site_url('wasms/webhook/whatsapp'); ?></code><br/>
                                 <?php echo _l('wasms_webhook_verify_token'); ?>: <code><?php echo html_escape(get_option('wasms_cloud_verify_token')); ?></code></p>
